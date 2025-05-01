@@ -2,121 +2,122 @@
 
 public class CuentaBancaria
 {
-    private TipoCuenta _tipo;
-    private string _numero;
-    private decimal _saldo;
-    private Estado _estado;
-    private decimal _tasaDeInteres;
-    private decimal _limiteDeDescubierto;
-    private decimal _comision;
-    private string[] _titulares;
+  
+    public TipoCuenta Tipo { get; }
+    public string Numero { get; }
+    public decimal Saldo { get; private set; }
+    public Estado MiEstado { get; set; }
+    public decimal TasaDeInteres { get; set; }
+    public decimal LimiteDeDescubierto { get; set; }
+    public decimal Comision { get; set; }
+    public string[] Titulares { get; init;  }
+
 
     public CuentaBancaria(string numero, decimal saldo, TipoCuenta tipo, string[] titulares)
     {
-        _numero = numero;
-        _saldo = saldo;
-        _tipo = tipo;
-        _estado = Estado.Activa;
-        _titulares = titulares;
+        Numero = numero;
+        Saldo = saldo;
+        Tipo = tipo;
+        Titulares = titulares;
     }
     #region Getters/Setters
     public string GetNumero()
     {
-        return _numero;
+        return Numero;
     }
 
     public decimal GetSaldo()
     {
-        return _saldo;
+        return Saldo;
     }
     public TipoCuenta GetTipo()
     {
-        return _tipo;
+        return Tipo;
     }
 
     public Estado GetEstado()
     {
-        return _estado;
+        return MiEstado;
     }
 
     public void SetEstado(Estado estado)
     {
-        _estado = estado;
+        MiEstado = estado;
     }
 
     public decimal GetTasaDeInteres()
     {
-        return _tasaDeInteres;
+        return TasaDeInteres;
     }
 
     public void SetTasaDeInteres(decimal tasaDeInteres)
     {
-        _tasaDeInteres = tasaDeInteres;
+        TasaDeInteres = tasaDeInteres;
     }
 
     public decimal GetLimiteDeDescubierto()
     {
-        return _limiteDeDescubierto;
+        return LimiteDeDescubierto;
     }
 
     public void SetLimiteDeDescubierto(decimal limiteDeDescubierto)
     {
-        _limiteDeDescubierto = limiteDeDescubierto;
+        LimiteDeDescubierto = limiteDeDescubierto;
     }
 
     public decimal GetComision()
     {
-        return _comision;
+        return Comision;
     }
 
     public void SetComision(decimal comision)
     {
-        _comision = comision;
+        Comision = comision;
     }
 
     public string[] GetTitulares()
     {
-        return _titulares;
+        return Titulares;
     }
     #endregion
 
     public void Depositar(decimal monto)
     {
-        if (_tipo == TipoCuenta.CajaDeAhorro)
+        if (Tipo == TipoCuenta.CajaDeAhorro)
         {
-            _saldo += monto;
+            Saldo += monto;
         }
-        else if (_tipo == TipoCuenta.CuentaCorriente)
+        else if (Tipo == TipoCuenta.CuentaCorriente)
         {
-            monto -= monto * _comision;
-            _saldo += monto;
+            monto -= monto * Comision;
+            Saldo += monto;
         }
     }
 
     public void Retirar(decimal monto)
     {
-        if (_tipo == TipoCuenta.CajaDeAhorro)
+        if (Tipo == TipoCuenta.CajaDeAhorro)
         {
-            _saldo -= monto;
+            Saldo -= monto;
         }
-        else if (_tipo == TipoCuenta.CuentaCorriente)
+        else if (Tipo == TipoCuenta.CuentaCorriente)
         {
-            if (_saldo - monto >= -_limiteDeDescubierto)
+            if (Saldo - monto >= -LimiteDeDescubierto)
             {
-                _saldo -= monto;
+                Saldo -= monto;
             }
-            if (_saldo < 0)
+            if (Saldo < 0)
             {
-                _estado = Estado.Suspendida;
+                MiEstado = Estado.Suspendida;
             }
         }
     }
 
     public void AplicarInteres()
     {
-        if (_tipo == TipoCuenta.CajaDeAhorro)
+        if (Tipo == TipoCuenta.CajaDeAhorro)
         {
-            _saldo += _saldo * _tasaDeInteres;
+            Saldo += Saldo * TasaDeInteres;
         }
     }
 }
