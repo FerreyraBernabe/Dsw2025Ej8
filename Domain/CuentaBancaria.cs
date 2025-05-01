@@ -9,9 +9,9 @@ public class CuentaBancaria
     private decimal _tasaDeInteres;
     private decimal _limiteDeDescubierto;
     private decimal _comision;
-    private string[] _titulares;
+    private Cliente[] _titulares;
 
-    public CuentaBancaria(string numero, decimal saldo, TipoCuenta tipo, string[] titulares)
+    public CuentaBancaria(string numero, decimal saldo, TipoCuenta tipo, Cliente[] titulares)
     {
         _numero = numero;
         _saldo = saldo;
@@ -19,6 +19,8 @@ public class CuentaBancaria
         _estado = Estado.Activa;
         _titulares = titulares;
     }
+
+
     #region Getters/Setters
     public string GetNumero()
     {
@@ -74,7 +76,7 @@ public class CuentaBancaria
         _comision = comision;
     }
 
-    public string[] GetTitulares()
+    public Cliente[] GetTitulares()
     {
         return _titulares;
     }
