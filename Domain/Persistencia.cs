@@ -25,6 +25,7 @@ namespace Dsw2025Ej8.Domain
                 Clientes[3] = new Cliente("Ana", "Banana", 44599999);
                 Clientes[4] = new Cliente("Andre", "Robotica", 44030309);
 
+
                 //inicializo las Cuentas
                 Random numeroCuenta= new Random();
                 Cuentas[0] = new CajaAhorro(numeroCuenta.Next().ToString(), 1000) { TasaDeInteres = 0.35M, LimiteDeDescubierto = 500M};
@@ -32,10 +33,10 @@ namespace Dsw2025Ej8.Domain
                 Cuentas[0].AddTitular(Clientes[1]);
 
                 Cuentas[1] = new CajaAhorro(numeroCuenta.Next().ToString(), 1500) { TasaDeInteres = 0.35M, LimiteDeDescubierto = 500M };
-                Cuentas[1].AddTitular(Clientes[1]);
+                Cuentas[1].AddTitular(Clientes[2]);
 
                 Cuentas[2] = new CuentaCorriente(numeroCuenta.Next().ToString(), 2000) { TasaDeInteres = 0.25M, LimiteDeDescubierto = 600M };
-                Cuentas[2].AddTitular(Clientes[2]);
+                Cuentas[2].AddTitular(Clientes[1]);
                 Cuentas[2].AddTitular(Clientes[3]);
 
                 Cuentas[3] = new CuentaCorriente(numeroCuenta.Next().ToString(), 2500) { TasaDeInteres = 0.250M, LimiteDeDescubierto = 600M };

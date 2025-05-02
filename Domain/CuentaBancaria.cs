@@ -43,7 +43,14 @@ public abstract class CuentaBancaria : ICuentaBancaria
 
     public void AddTitular(Cliente cliente) 
     {
-        int indice = Titulares.Length;
+        int indice = 0;
+        for (int i = 0; i < Titulares.Length; i++) 
+        {
+            if(Titulares[i] != null) 
+            {
+                indice++;
+            }
+        }
         Titulares[indice] = cliente;
     }
 
