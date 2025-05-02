@@ -11,5 +11,9 @@ namespace Dsw2025Ej8.Domain
         public void Depositar(decimal monto);
 
         public void Retirar(decimal monto);
+
+        public void AddTitular(Cliente cliente);
+
+        public void MostrarResumenCuenta();
     }
 }

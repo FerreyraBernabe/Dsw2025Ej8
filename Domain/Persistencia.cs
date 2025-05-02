@@ -6,44 +6,52 @@ using System.Threading.Tasks;
 
 namespace Dsw2025Ej8.Domain
 {
-    public class Persistencia
+    public static class Persistencia
     {
-        private Cliente[] clientes;
-        private CuentaBancaria[] cuentas;
-        public Persistencia()
-        {
-            clientes = new Cliente[4];
-            cuentas = new CuentaBancaria[4];
-        }
 
-        public void CargarDatos() 
-        {
-
-            //inicializo a los clientes
-            clientes[0] = new Cliente("Bernabé", "Ferreyra", 43289860);
-            clientes[1] = new Cliente("Nocturn", "Infernum", 66666666);
-            clientes[2] = new Cliente("Astrid", "Colpinto", 45000000);
-            clientes[3] = new Cliente("Ana", "Banana", 44599999);
-            clientes[4] = new Cliente("Andre", "Robotica", 44030309);
-
-            //inicializo las cuentas
-            Random numeroCuenta= new Random();
-            cuentas[0] = new CajaAhorro(numeroCuenta.Next().ToString(), 1000) { TasaDeInteres = 3.5M, LimiteDeDescubierto = 500};
-            cuentas[0].AddTitular(clientes[0]);
-            cuentas[0].AddTitular(clientes[1]);
-
-            cuentas[1] = new CajaAhorro(numeroCuenta.Next().ToString(), 1500) { TasaDeInteres = 3.5M, LimiteDeDescubierto = 500 };
-            cuentas[1].AddTitular(clientes[1]);
-
-            cuentas[2] = new CajaAhorro(numeroCuenta.Next().ToString(), 2000) { TasaDeInteres = 5.00M, LimiteDeDescubierto = 600 };
-            cuentas[2].AddTitular(clientes[2]);
-            cuentas[2].AddTitular(clientes[3]);
-
-            cuentas[3] = new CajaAhorro(numeroCuenta.Next().ToString(), 2500) { TasaDeInteres = 5.00M, LimiteDeDescubierto = 600 };
-            cuentas[3].AddTitular(clientes[4]);
+            public static Cliente[]? Clientes { get; private set; }
+            public static CuentaBancaria[]? Cuentas { get; private set; }
 
 
-        } 
+            public static void CargarDatos() 
+            {
+                Clientes = new Cliente[5]; 
+                Cuentas = new CuentaBancaria[4];
+
+                //inicializo a los Clientes
+                Clientes[0] = new Cliente("Bernabé", "Ferreyra", 43289860);
+                Clientes[1] = new Cliente("Nocturn", "Infernum", 66666666);
+                Clientes[2] = new Cliente("Astrid", "Colapinto", 45000000);
+                Clientes[3] = new Cliente("Ana", "Banana", 44599999);
+                Clientes[4] = new Cliente("Andre", "Robotica", 44030309);
+
+                //inicializo las Cuentas
+                Random numeroCuenta= new Random();
+                Cuentas[0] = new CajaAhorro(numeroCuenta.Next().ToString(), 1000) { TasaDeInteres = 0.35M, LimiteDeDescubierto = 500M};
+                Cuentas[0].AddTitular(Clientes[0]);
+                Cuentas[0].AddTitular(Clientes[1]);
+
+                Cuentas[1] = new CajaAhorro(numeroCuenta.Next().ToString(), 1500) { TasaDeInteres = 0.35M, LimiteDeDescubierto = 500M };
+                Cuentas[1].AddTitular(Clientes[1]);
+
+                Cuentas[2] = new CuentaCorriente(numeroCuenta.Next().ToString(), 2000) { TasaDeInteres = 0.25M, LimiteDeDescubierto = 600M };
+                Cuentas[2].AddTitular(Clientes[2]);
+                Cuentas[2].AddTitular(Clientes[3]);
+
+                Cuentas[3] = new CuentaCorriente(numeroCuenta.Next().ToString(), 2500) { TasaDeInteres = 0.250M, LimiteDeDescubierto = 600M };
+                Cuentas[3].AddTitular(Clientes[4]);
+
+
+            }
+
+            public static void MostrarCuentas()
+            {
+                foreach (CuentaBancaria c in Cuentas)
+                {
+                    c.MostrarResumenCuenta();
+                }
+            }
     }
-}
+ }
+
 

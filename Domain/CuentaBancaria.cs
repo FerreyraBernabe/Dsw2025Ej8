@@ -46,4 +46,6 @@ public abstract class CuentaBancaria : ICuentaBancaria
         int indice = Titulares.Length;
         Titulares[indice] = cliente;
     }
+
+    public abstract void MostrarResumenCuenta();
 }

@@ -11,8 +11,8 @@ namespace Dsw2025Ej8.Domain
     public class CuentaCorriente : CuentaBancaria
     {
 
-        public CuentaCorriente(string numero, decimal saldo, Cliente[] titulares)
-            : base (numero,saldo,titulares)
+        public CuentaCorriente(string numero, decimal saldo)
+            : base (numero,saldo)
         {
             this.Tipo = TipoCuenta.CuentaCorriente;
         }
@@ -36,10 +36,10 @@ namespace Dsw2025Ej8.Domain
                 MiEstado = Estado.Suspendida;
             }
         }
-
-        public override string ToString()
+        public override void MostrarResumenCuenta()
         {
-            return "Caja de Ahorro";
+            var resumen = new { _nroCuenta = this.Numero, _tipo = this.Tipo, _saldo = Saldo };
+            Console.WriteLine($"Número de cuenta: {resumen._nroCuenta}, Tipo de cuenta: {resumen._tipo.ToString()}, Saldo: ${resumen._saldo}");
         }
     }
 }
