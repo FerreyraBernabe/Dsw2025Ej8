@@ -6,19 +6,14 @@ using System.Threading.Tasks;
 
 namespace Dsw2025Ej8.Domain
 {
-    public class Cliente
+    public class Cliente : Persona
     {
+        private int nroCliente;
         public Cliente(string nombre, string apellido, int dni, string domicilio = "")
+            : base (nombre, apellido, dni, domicilio)
         {
-            Nombre = nombre;
-            Apellido = apellido;
-            Domicilio = domicilio;
-            Dni = dni;
+            
         }
 
-        public string Nombre { get; set; }
-        public string Apellido { get; set; }
-        public int Dni { get; set; }
-        public string Domicilio { get; set; }
     }
 }
