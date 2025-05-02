@@ -11,13 +11,14 @@ public abstract class CuentaBancaria : ICuentaBancaria
     public decimal TasaDeInteres { get; init; }
     public decimal LimiteDeDescubierto { get; init; }
     public decimal Comision { get; set; }
-    public Cliente[] Titulares { get; init; }
+    public Cliente[] Titulares { get;}
 
 
     public CuentaBancaria(string numero, decimal saldo)
     {
         Numero = numero;
         Saldo = saldo;
+        Titulares = new Cliente[2];
     }
 
     public virtual void Depositar(decimal monto) 
