@@ -44,8 +44,9 @@ namespace Dsw2025Ej8.Domain
         }
         public override void MostrarResumenCuenta()
         {
-            var resumen = new { _nroCuenta = this.Numero, _tipo = this.Tipo, _saldo = Saldo };
-            Console.WriteLine($"Número de cuenta: {resumen._nroCuenta}, Tipo de cuenta: {resumen._tipo.ToString()}, Saldo: ${resumen._saldo}");
+            var resumen = new { _nroCuenta = this.Numero, _tipo = this.Tipo, _saldo = Saldo, _estado = this.MiEstado };
+            Console.WriteLine();
+            Console.WriteLine($"Número de cuenta: {resumen._nroCuenta}, Tipo de cuenta: {resumen._tipo.ToString()}, Saldo: ${resumen._saldo}, Estado de cuenta: {resumen._estado.ToString()}");
         }
     }
 }
