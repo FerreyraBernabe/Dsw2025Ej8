@@ -19,22 +19,28 @@ namespace Dsw2025Ej8.Domain
 
         public override void Depositar(decimal monto)
         {
+            try
+            {
                 base.Depositar(monto);
                 monto -= monto * Comision;
                 Saldo += monto;
+            }
+            catch (MontoNoValido montoEx) { Console.WriteLine(montoEx.Message); }
+            catch (CuentaNoActiva cuentaEx) { Console.WriteLine(cuentaEx.Message); }
+            catch (SaldoInsuficiente saldoEx) { Console.WriteLine(saldoEx.Message); }
         }
 
         public override void Retirar(decimal monto)
         {
-            base.Retirar(monto);
-            if (Saldo - monto >= -LimiteDeDescubierto)
+            try
             {
-                Saldo -= monto;
+                base.Retirar(monto);
+                Saldo -= monto; 
             }
-            if (Saldo < 0)
-            {
-                MiEstado = Estado.Suspendida;
-            }
+            catch (MontoNoValido montoEx) { Console.WriteLine(montoEx.Message); }
+            catch (CuentaNoActiva cuentaEx) { Console.WriteLine(cuentaEx.Message); }
+            catch (SaldoInsuficiente saldoEx) { Console.WriteLine(saldoEx.Message); }
+
         }
         public override void MostrarResumenCuenta()
         {

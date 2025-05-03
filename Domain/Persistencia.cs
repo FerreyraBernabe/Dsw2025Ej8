@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Dsw2025Ej8.Exceptions;
 
 namespace Dsw2025Ej8.Domain
 {
@@ -35,11 +36,11 @@ namespace Dsw2025Ej8.Domain
                 Cuentas[1] = new CajaAhorro(numeroCuenta.Next().ToString(), 1500) { TasaDeInteres = 0.35M, LimiteDeDescubierto = 500M };
                 Cuentas[1].AddTitular(Clientes[2]);
 
-                Cuentas[2] = new CuentaCorriente(numeroCuenta.Next().ToString(), 2000) { TasaDeInteres = 0.25M, LimiteDeDescubierto = 600M };
+                Cuentas[2] = new CuentaCorriente(numeroCuenta.Next().ToString(), 2000) { TasaDeInteres = 0.25M, LimiteDeDescubierto = 2000M };
                 Cuentas[2].AddTitular(Clientes[1]);
                 Cuentas[2].AddTitular(Clientes[3]);
 
-                Cuentas[3] = new CuentaCorriente(numeroCuenta.Next().ToString(), 2500) { TasaDeInteres = 0.250M, LimiteDeDescubierto = 600M };
+                Cuentas[3] = new CuentaCorriente(numeroCuenta.Next().ToString(), 2500) { TasaDeInteres = 0.250M, LimiteDeDescubierto = 2000M };
                 Cuentas[3].AddTitular(Clientes[4]);
 
 
@@ -52,7 +53,29 @@ namespace Dsw2025Ej8.Domain
                     c.MostrarResumenCuenta();
                 }
             }
+
+            public static void RealizarRetiros() 
+            {
+                foreach(CuentaBancaria c in Cuentas) 
+                {
+                        c.Retirar(0);
+                        c.Retirar(1600);
+                        c.Retirar(500);
+                }
+             }
+            public static void RealizarDepositos()
+            {
+                foreach (CuentaBancaria c in Cuentas)
+                {
+                    c.Depositar(0);
+                    c.Depositar(1600);
+                    c.Depositar(-200);
+                }
+            }
+
+
     }
- }
+    }
+ 
 
 

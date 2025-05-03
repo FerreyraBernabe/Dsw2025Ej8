@@ -4,6 +4,7 @@ using System.Linq;
 using System.Net.WebSockets;
 using System.Text;
 using System.Threading.Tasks;
+using Dsw2025Ej8.Exceptions;
 
 namespace Dsw2025Ej8.Domain
 {
@@ -18,14 +19,29 @@ namespace Dsw2025Ej8.Domain
 
         public override void Depositar(decimal monto)
         {
-            base.Depositar(monto);
-            Saldo += monto;
+            try
+            {
+                base.Depositar(monto);
+                Saldo += monto;
+            }
+            
+            catch (MontoNoValido montoEx) { Console.WriteLine(montoEx.Message); }
+            catch (CuentaNoActiva cuentaEx) { Console.WriteLine(cuentaEx.Message); }
+            catch (SaldoInsuficiente saldoEx) { Console.WriteLine(saldoEx.Message); }
         }
 
         public override void Retirar(decimal monto)
         {
-            base.Retirar(monto);
-            Saldo -= monto;
+            try
+            {
+                base.Retirar(monto);
+                Saldo -= monto;
+            }
+            catch (MontoNoValido montoEx) { Console.WriteLine(montoEx.Message); }
+            catch (CuentaNoActiva cuentaEx) { Console.WriteLine(cuentaEx.Message); }
+            catch (SaldoInsuficiente saldoEx) { Console.WriteLine(saldoEx.Message); }
+
+
         }
         public void AplicarInteres()
         {

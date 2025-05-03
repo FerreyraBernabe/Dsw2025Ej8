@@ -10,26 +10,12 @@ namespace Dsw2025Ej8.Pruebas
 {
     public static class Pruebas
     {
-        public static void IniciarPruebas() 
-        {
-
-            try
-            {
+        public static void IniciarPruebas()
+        { 
                 Persistencia.CargarDatos();
+                Persistencia.RealizarRetiros();
+                Persistencia.RealizarDepositos();
                 Persistencia.MostrarCuentas();
-            }
-            catch (MontoNoValido montoEx) 
-            {
-                Console.WriteLine(montoEx.Message);
-            }
-            catch (CuentaNoActiva cuentaEx) 
-            {
-                Console.WriteLine(cuentaEx.Message);
-            }
-            catch (SaldoInsuficiente saldoEx) 
-            {
-                Console.WriteLine(saldoEx.Message);
-            }
         }
     }
 }

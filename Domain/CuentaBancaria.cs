@@ -19,26 +19,42 @@ public abstract class CuentaBancaria : ICuentaBancaria
         Numero = numero;
         Saldo = saldo;
         Titulares = new Cliente[2];
+        MiEstado = Estado.Activa;
     }
 
     public virtual void Depositar(decimal monto) 
     {
-        if (monto <= 0)
-        {
-            throw new MontoNoValido();
-        }
-    }
+            if (!MiEstado.Equals(Estado.Activa))
+            {
+                throw new CuentaNoActiva(MiEstado.ToString());
+            }
+
+            if (monto <= 0)
+            {
+                throw new MontoNoValido();
+            }
+    } 
+
 
     public virtual void Retirar(decimal monto) 
     {
-        if (monto <= 0)
-        {
-            throw new MontoNoValido();
-        }
-        if (monto > Saldo + LimiteDeDescubierto) 
-        { 
-            throw new SaldoInsuficiente(); 
-        }
+            if (!MiEstado.Equals(Estado.Activa))
+            {
+                throw new CuentaNoActiva(MiEstado.ToString());
+            }
+
+            if (monto <= 0)
+            {
+                throw new MontoNoValido();
+            }
+
+            //Este IF plantea la pregunta: ¿El usuario está tratando de retirar más dinero del que tiene INCLUSO si usa su límite de descubierto?
+            if (monto > Saldo + LimiteDeDescubierto)
+            {
+                MiEstado = Estado.Suspendida;
+                throw new SaldoInsuficiente();
+            }
+           //De ser cierto, ENTONCES se procede a la suspensión de la cuenta. En resumen, sólo se suspende una cuenta cuando el usuario trata de retirar más de lo que tiene, aún usando el límite.
     }
 
     public void AddTitular(Cliente cliente) 
